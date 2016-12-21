@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Add Book</title>
+</head>
+<body>
+	<h1>Add book page</h1>
+	<form action="/addBook" method="post" th:object="${bookWrapper}">
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Author</th>
+				<th>Category</th>
+			</tr>
+			<tr th:each="book,rowStat :*{bookList}">
+				<td><input type="number" th:field="*{bookList[__${rowStat.index}__].id}" /></td>
+				<td><input type="text" th:field="*{bookList[__${rowStat.index}__].name}" /></td>
+				<td><input type="text" th:field="*{bookList[__${rowStat.index}__].authorName}" /></td>
+				<td><select th:field="*{bookList[__${rowStat.index}__].category}" multiple="multiple">
+						<option th:each="ctg :${category}" th:text="${ctg}"
+							th:value="${ctg}" />
+				</select></td>
+				<td><input type="submit" name= "removeRow" value="Remove" /></td>
+			</tr>
+		</table>
+			
+		<input type="submit" name="addRow" value="Add" /> <input type="submit" value="Submit" />
+	</form>
+</body>
+</html>
