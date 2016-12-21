@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,9 +65,22 @@ public class BookController {
 		return "addBooks";
 	}
 	
-	@RequestMapping(value="/addBook",method = RequestMethod.POST)
+	@RequestMapping(value="/addBook",params="removeRow")
+	public String removeRow(BookWrapper books, HttpServletRequest request){
+		int index = Integer.parseInt(request.getParameter("removeRow"));
+		books.getBookList().remove(index);
+		return "addBooks";
+	}
+	
+	/*@RequestMapping(value="/addBook",method = RequestMethod.POST)
 	public String addBookEntry(@ModelAttribute(value="book") Book book){
 		service.addToList(book);
+		return "redirect:/";
+	}*/
+	
+	@RequestMapping(value="/addBook",method = RequestMethod.POST)
+	public String addBookEntry(@ModelAttribute(value="bookWrapper") BookWrapper books){
+		service.addBulk(books.getBookList());
 		return "redirect:/";
 	}
 }

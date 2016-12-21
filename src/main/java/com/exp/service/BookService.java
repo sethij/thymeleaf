@@ -2,11 +2,13 @@ package com.exp.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
 import com.exp.model.Book;
+import com.exp.model.BookWrapper;
 
 @Service
 public class BookService {
@@ -45,6 +47,13 @@ public class BookService {
 	
 	public void addToList(Book b){
 		books.put(b.getId(), b);
+		
+	}
+	
+	public void addBulk(List<Book> booksList){
+		for (Book b : booksList) {
+			books.put(b.getId(), b);
+		}
 		
 	}
 

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Hello Tanker</h1>
+<table>
+<tr>
+	<th>ID</th>
+	<th>Name</th>
+	<th>Author</th>
+	<th>Category</th>
+</tr>
+<tr th:each="book,status :${books}">
+	<td th:text="${status.count}"></td>
+	<td th:text="${book.value.name}"></td>
+	<td th:text="${book.value.authorName}"></td>
+	<td th:text="${book.value.category}"></td>
+</tr>
+</table>
+<form action="/add">
+<input type="submit" value="Add Book"/>
+</form>
+</body>
+</html>
