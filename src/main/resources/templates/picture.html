@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="ISO-8859-1"/>
 <title>Insert title here</title>
 </head>
 <body>
+<ul>
+<li th:each="file : ${filesList}" >
+<a th:href="@{view/__${file}__/}" th:text="${file}"></a> 
+<!-- <img th:src="@{view/__${file}__/}" width="100" height="100" th:title="${file}"/> -->
+</li>
+</ul>
 
 </body>
 </html>
